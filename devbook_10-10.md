@@ -5,13 +5,17 @@
 ## Team Members and Roles
 
 Brendan McDonald - Backend Developer
+
 Aaditya Shah - Front-end Developer
+
 Nick Taber - Database Developer
+
 Radha Mendapra - Database Developer
 
 ## Background
 
 Pocketfilms is a website that collects short films, documentaries, indie films, and ‘how to’ videos from various sources and makes it available for viewing on their site. It allows users to login and enter information about a short film and upload a two minute preview video of the film. 
+
 There is currently no way for users to personalize their list of movies.
 
 ## Project Description
@@ -96,11 +100,13 @@ Data layer needs to access list of movies and users. It needs to search for user
 Movies would be searched for by movie title, year, director, actor, and keyword. 
 
 * Business Layer
+
 Recommend users who have over X followers or are tagged as film critics.
 Recommend movies that more than X friends have already watched or want to watch and is not in already watched list.
 Users will be able to view and edit their only profile but only view other user profiles
 
 * Presentation Layer
+
 The presentation layer will handle the event listeners for all user actions such as following a user or adding a movie to a certain list. It will display the lists and the feed from a user’s ‘following’ list.
 
 ## Classes
@@ -108,12 +114,15 @@ The presentation layer will handle the event listeners for all user actions such
 * Data Layer
 
 Movie class
+
 Movie class is an object class that represents an individual movie object. Movie stores movie info including cast, crew, release year, and plot keywords. Movie class is not aware of the user class.
 
 User class
+
 Users are objects stored in our own database (not through movie API) that have name and basic personal information. They can also be related to movies through favoriting movies, rating movies, placing movies on watch lists, etc.
 
 List class
+
 Handles the individual user’s lists, containing a collection of movie objects, writing to and reading from the database.
 
 * Business Layer
@@ -123,9 +132,11 @@ At this point, we do not see the business layer having any classes here.
 * Presentation Layer
 
 Profile class
+
 The profile class will receive the data layer’s user class display it as a profile, allowing for edits if the profile is the that of the current user logged in.
 
 Newsfeed class
+
 The newsfeed class will have methods to process all of the information needed to create an individualized feed for each user. The constructor will accept a user id and construct the feed based on the user data. 
 
 ## Code Snippets
