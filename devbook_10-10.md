@@ -29,12 +29,15 @@ Here are some of the requirements for this project:
 * Add a movie to your favorites list
 * Review and rate the movies
 * Users can search for their friends by username and follow them to be up to date with the movies their friends are watching
+* User doesn’t enter any information about the plot, the user only searches for movies
 
 ## Business Rules
 
-* Users can follow other users
-* Users can rate films and change their rating
-* Users can search for movies and other users
+* There is no limit to the number of users a user can follow
+* There is no limit to the number of movies a user can add to any list
+* Users can mark a movie watched from the “to watch” list and it will be moved to the “Watched list”.
+* There will be no movie in both the to watch list and the watched list
+* User can make his own lists but the default lists will be “To watch” and “Watched”
 
 ## Technologies Used
 
@@ -98,6 +101,7 @@ We will also be using Facade pattern which would help us put together all our su
 
 Data layer needs to access list of movies and users. It needs to search for users and follow them. 
 Movies would be searched for by movie title, year, director, actor, and keyword. 
+We will be using OMDB as a proxy to get the data since we cannot use data from pocketfilms.
 
 * Business Layer
 
@@ -139,10 +143,48 @@ Newsfeed class
 
 The newsfeed class will have methods to process all of the information needed to create an individualized feed for each user. The constructor will accept a user id and construct the feed based on the user data. 
 
+## Exception Handling
+
+* Data Input invalid/unsanitary (dangerous syntax, etc.)
+Layer: Data Layer and Business Layer 
+Prevent it from going to data layer
+In case if it goes to data layer, it will be handled in business layer
+Exception: Query something that is invalid or syntactically problematic
+Our Solution: Handled by preventing the query from getting through the database and inform with an error message
+Example: User searches for a movie titled “Drop table `users` where 1=1”
+
+* Using both client-side and server-side data validation and sanitization
+Data no longer exists/updated
+Layer: Data Layer, because you won’t know that the data has been until you try to access it.
+Exception: Trying to access data that no longer exists or has been updated
+Our Solution: Handled by informing user
+Example: User deletes their account, other users’ following them need to have their lists updated
+
+* Removing occurrences of the deleted user ID from related tables’ rows
+Unable to access the database
+Layer: Data Layer, for some reasons as above.
+Exception:
+Our Solution: Handled by informing user to re-install the application or contact the development
+Example: Internal change that is not accounted for by the application such as operating system or architecture update, Passwords might be changed
+
+* Incorrect Login Credentials	
+Layer: Business Layer
+Pull from the data layer and handled in business layer
+Exception: Login credentials do not meet the requirements
+Our Solution: Handled by informing user to re-enter their login information
+Example: User either forgets their login information or types it incorrectly, User tries to access someone else’s account
+
+* Duplicate Data 
+Layer: Business Layer
+Exception: Unique data would be overwritten if the query was to be committed
+Our Solution: Handled by preventing user to register and informing them to re-register using different credentials
+Example: Registering an account with a username/email that already exists
+
 ## Code Snippets
 
 * Data / Business Layer
 
+```
 var express = require('express')
 var mdb = require('moviedb')('7227ee533c81a8acbb443c98ec625841')
 var app = express()
@@ -156,11 +198,11 @@ app.get('/', function(req, res){
 
 
 app.listen(3000)
+```
 
-* Presentation Layer
+* Presentation Layer - Javascript
 
-Javascript
-
+```
 $(document).ready(function(){
 	
 	$(".movie-image").hover(function(){
@@ -448,3 +490,4 @@ h1#logo a { float:left; width:239px; height:100px; background:url('images/logo.p
 #footer a:hover { color:#e44400; text-decoration:none; }
 
 #footer a:hover.designby { color:#9c9c9c; text-decoration:none; }
+```
