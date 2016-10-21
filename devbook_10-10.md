@@ -148,43 +148,40 @@ The newsfeed class will have methods to process all of the information needed to
 * Data Input invalid/unsanitary (dangerous syntax, etc.)
 
 	* Layer: Data Layer and Business Layer 
-	* Prevent it from going to data layer
-	* In case if it goes to data layer, it will be handled in business layer
+		* Prevent it from going to data layer
+		* In case if it goes to data layer, it will be handled in business layer
 	* Exception: Query something that is invalid or syntactically problematic
 	* Our Solution: Handled by preventing the query from getting through the database and inform with an error message
 	* Example: User searches for a movie titled “Drop table `users` where 1=1”
 
-	* Using both client-side and server-side data validation and sanitization
+		* Using both client-side and server-side data validation and sanitization
 
-Data no longer exists/updated
+* Data no longer exists/updated
 
-Layer: Data Layer, because you won’t know that the data has been until you try to access it.
-
-Exception: Trying to access data that no longer exists or has been updated
-
-Our Solution: Handled by informing user
-
-Example: User deletes their account, other users’ following them need to have their lists updated
-
-* Removing occurrences of the deleted user ID from related tables’ rows
-Unable to access the database
-Layer: Data Layer, for some reasons as above.
-Exception:
-Our Solution: Handled by informing user to re-install the application or contact the development
-Example: Internal change that is not accounted for by the application such as operating system or architecture update, Passwords might be changed
+	* Layer: Data Layer, because you won’t know that the data has been until you try to access it.
+	* Exception: Trying to access data that no longer exists or has been updated
+	* Our Solution: Handled by informing user
+	* Example: User deletes their account, other users’ following them need to have their lists updated
+		* Removing occurrences of the deleted user ID from related tables’ rows
+		
+* Unable to access the database
+	* Layer: Data Layer, for some reasons as above.
+	* Exception: Connection string has become corrupt
+	* Our Solution: Handled by informing user to re-install the application or contact the development
+	* Example: Internal change that is not accounted for by the application such as operating system or architecture update, Passwords might be changed
 
 * Incorrect Login Credentials	
-Layer: Business Layer
-Pull from the data layer and handled in business layer
-Exception: Login credentials do not meet the requirements
-Our Solution: Handled by informing user to re-enter their login information
-Example: User either forgets their login information or types it incorrectly, User tries to access someone else’s account
+	* Layer: Business Layer
+		* Pull from the data layer and handled in business layer
+	* Exception: Login credentials do not meet the requirements
+	* Our Solution: Handled by informing user to re-enter their login information
+	* Example: User either forgets their login information or types it incorrectly, User tries to access someone else’s account
 
 * Duplicate Data 
-Layer: Business Layer
-Exception: Unique data would be overwritten if the query was to be committed
-Our Solution: Handled by preventing user to register and informing them to re-register using different credentials
-Example: Registering an account with a username/email that already exists
+	* Layer: Business Layer
+	* Exception: Unique data would be overwritten if the query was to be committed
+	* Our Solution: Handled by preventing user to register and informing them to re-register using different credentials
+	* Example: Registering an account with a username/email that already exists
 
 ## Code Snippets
 
