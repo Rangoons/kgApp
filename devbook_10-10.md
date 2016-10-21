@@ -147,14 +147,14 @@ The newsfeed class will have methods to process all of the information needed to
 
 * Data Input invalid/unsanitary (dangerous syntax, etc.)
 
-** Layer: Data Layer and Business Layer 
-** Prevent it from going to data layer
-** In case if it goes to data layer, it will be handled in business layer
-** Exception: Query something that is invalid or syntactically problematic
-** Our Solution: Handled by preventing the query from getting through the database and inform with an error message
-** Example: User searches for a movie titled “Drop table `users` where 1=1”
+	* Layer: Data Layer and Business Layer 
+	* Prevent it from going to data layer
+	* In case if it goes to data layer, it will be handled in business layer
+	* Exception: Query something that is invalid or syntactically problematic
+	* Our Solution: Handled by preventing the query from getting through the database and inform with an error message
+	* Example: User searches for a movie titled “Drop table `users` where 1=1”
 
-* Using both client-side and server-side data validation and sanitization
+	* Using both client-side and server-side data validation and sanitization
 
 Data no longer exists/updated
 
