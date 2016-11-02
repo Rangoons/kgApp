@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Movies list</title>
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!-- <button class="my_selector">click me for a movie</button> -->
+    <form id="searchbox" action="">
+    <input id="search" type="text" placeholder="Type here">
+    <input id="submit" type="submit" value="Search">
+</form>
+  </body>
+  <script type="text/javascript">
+  $('#submit').click(function(e){
+    e.preventDefault()
+  var id = $('#search').val()
+ $.get('http://localhost:3000/'+id, {}, function(data){
+      console.log(data)
+ });
+});
+  </script>
+</html>
