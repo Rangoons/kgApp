@@ -18,10 +18,16 @@
   <script type="text/javascript">
   $('#submit').click(function(e){
     e.preventDefault()
-  var id = $('#search').val()
- $.get('http://localhost:3000/'+id, {}, function(data){
+  var title = $('#search').val()
+ $.get('http://localhost:3000/'+title, {}, function(data){
       console.log(data)
  });
 });
+$.get('http://localhost:3000', {}, function(data){
+  $.each(data.results,function(key, value){
+    console.log(data.results[key].title)
+  })
+
+})
   </script>
 </html>
