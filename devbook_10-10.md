@@ -1,6 +1,6 @@
-# Milestone 3 - Layering
+# Milestone 7 - Testing
 # Brendan McDonald, Aaditya Shah, Nick Taber, Radha Mendapra
-## October 10, 2016
+## December 2, 2016
 
 ## Team Members and Roles
 
@@ -183,314 +183,111 @@ The newsfeed class will have methods to process all of the information needed to
 	* Our Solution: Handled by preventing user to register and informing them to re-register using different credentials
 	* Example: Registering an account with a username/email that already exists
 
-## Code Snippets
-
-* Data / Business Layer
+* Exception Handling Code Snippets
 
 ```
-var express = require('express')
-var mdb = require('moviedb')('7227ee533c81a8acbb443c98ec625841')
-var app = express()
-var movieRes = '';
-  mdb.movieInfo({id: 666}, function(err, res){
-    movieRes = JSON.stringify(res)
-  })
-app.get('/', function(req, res){
-  res.send(movieRes)
-})
-
-
-app.listen(3000)
-```
-
-* Presentation Layer - Javascript
-
-```
-$(document).ready(function(){
-	
-	$(".movie-image").hover(function(){
-		$(this).find(".play").show();
-
-	},
-	function()
-	{
-		$(this).find(".play").hide();
-	});
-
-
-	$(".blink").focus(function() {
-            if(this.title==this.value) {
-                this.value = '';
-            }
-        })
-        .blur(function(){
-            if(this.value=='') {
-                this.value = this.title;                    
-			}
-		});
-});
-
-HTML
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
-<head>
-	<title>Pocket Films</title>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
-	<!--[if IE 6]>
-		<link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" />
-	<![endif]-->
-	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="js/jquery-func.js"></script>
-</head>
-<body>
-<!-- Shell -->
-<div id="shell">
-	<!-- Header -->
-	<div id="header">
-		<h1 class="logo" id="logo"><a href="#">Pocket Films</a></h1>
-		
-		<!-- Navigation -->
-		<div id="navigation">
-			<ul>
-			    <li><a class="active" href="#">HOME</a></li>
-			    <li><a href="#">NEWS</a></li>
-			    <li><a href="#">IN THEATERS</a></li>
-			    <li><a href="#">COMING SOON</a></li>
-			    <li><a href="#">CONTACT</a></li>
-			    <li><a href="#">LOG IN / SIGN UP</a></li>
-			</ul>
-		</div>
-		<!-- end Navigation -->
-		
-		<!-- Sub-menu -->
-		<div id="sub-navigation">
-			<ul>
-			    <li><a href="#">SHOW ALL</a></li>
-			    <li><a href="#">LATEST TRAILERS</a></li>
-			    <li><a href="#">TOP RATED</a></li>
-			    <li><a href="#">MOST COMMENTED</a></li>
-			</ul>
-			<div id="search">
-				<form action="home_submit" method="get" accept-charset="utf-8">
-					<label for="search-field">SEARCH</label>					
-					<input type="text" name="search field" value="Enter search here" id="search-field" title="Enter search here" class="blink search-field"  />
-					<input type="submit" value="GO!" class="search-button" />
-				</form>
-			</div>
-		</div>
-		<!-- end Sub-Menu -->
-		
-	</div>
-	<!-- end Header -->
-	
-	<!-- Main -->
-	<div id="main">
-		<!-- Content -->
-		<div id="content">
-
-			<!-- Box -->
-			<div class="box">
-				<div class="head">
-					<h2>LATEST TRAILERS</h2>
-					<p class="text-right"><a href="#">See all</a></p>
-				</div>
-				
-				<!-- Movie -->
-				<div class="movie">
-					<div class="movie-image">
-						<a href="#"><span class="play"><span class="name">SPIDER MAN 2</span></span><img src="css/images/movie2.jpg" alt="movie" /></a>
-					</div>
-					<div class="rating">
-						<p>RATING</p>
-						<div class="stars">
-							<div class="stars-in">
-								
-							</div>
-						</div>
-						<span class="comments">12</span>
-					</div>
-				</div>
-				<!-- end Movie -->
-				
-				<!-- Movie -->
-				<div class="movie">
-					<div class="movie-image">
-						<a href="#"><span class="play"><span class="name">SPIDER MAN 3</span></span><img src="css/images/movie3.jpg" alt="movie" /></a>
-					</div>
-					<div class="rating">
-						<p>RATING</p>
-						<div class="stars">
-							<div class="stars-in">
-								
-							</div>
-						</div>
-						<span class="comments">12</span>
-					</div>
-				</div>
-				<!-- end Movie -->
-			
-				<div class="cl">&nbsp;</div>
-			</div>
-			<!-- end Box -->
-			
-		</div>
-		<!-- end Content -->
-
-		<!-- NEWS -->
-		<div id="news">
-			<div class="head">
-				<h3>NEWS</h3>
-				<p class="text-right"><a href="#">See all</a></p>
-			</div>
-			
-			<div class="content">
-				<p class="date">12.04.09</p>
-				<h4>Disney's A Christmas Carol</h4>
-				<p>&quot;Disney's A Christmas Carol,&quot; a multi-sensory thrill ride re-envisioned by Academy Award&reg;-winning filmmaker Robert Zemeckis, captures... </p>
-				<a href="#">Read more</a>
-			</div>
-		</div>
-		<!-- end NEWS -->
-		
-		<!-- Coming -->
-		<div id="coming">
-			<div class="head">
-				<h3>COMING SOON<strong>!</strong></h3>
-				<p class="text-right"><a href="#">See all</a></p>
-			</div>
-			<div class="content">
-				<h4>The Princess and the Frog </h4>
-					<a href="#"><img src="css/images/coming-soon1.jpg" alt="coming soon" /></a>
-				<p>Walt Disney Animation Studios presents the musical "The Princess and the Frog," an animated comedy set in the great city of New Orleans...</p>
-				<a href="#">Read more</a>
-			</div>			
-		</div>
-		<!-- end Coming -->
-		<div class="cl">&nbsp;</div>
-	</div>
-	<!-- end Main -->
-
-	<!-- Footer -->
-	<div id="footer">
-		<p>
-			<a href="#">HOME</a> <span>|</span>
-			<a href="#">NEWS</a> <span>|</span>
-			<a href="#">IN THEATERS</a> <span>|</span>
-			<a href="#">COMING SOON </a> <span>|</span>
-			<a href="#">LATERS TRAILERS</a> <span>|</span>
-			<a href="#">TOP RATED TRAILERS</a> <span>|</span>
-			<a href="#">MOST COMMENTED TRAILERS</a> <span>|</span>
-			<a href="#">ADVERTISE</a> <span>|</span>
-			<a href="#">CONTACT </a>
-		</p>
-		<p> &copy; 2016 POCKET FILMS, LLC. All Rights Reserved. Designed by Aaditya Shah</p>
-	</div>
-	<!-- end Footer -->
-</div>
-<!-- end Shell -->
-</body>
-</html>
-
-CSS
-
-* { margin: 0; padding: 0; outline:0; }
-
-body {
-    font-size: 12px;
-    line-height: 1.3;
-    font-family: Arial, Helvetica, Sans-Serif;
-    color: #ccc;
-    background: url('images/body-bg.gif');
+//validate title input
+function validateData() {
+	title = document.getElementById("title");
+    title.innerHTML = "";
+    x = document.getElementById("datainput").value;
+try {
+	if (x == "") throw "is empty. Please enter a value";
+	if (x > 50) throw "is too long of a title. Please enter a valid program title ";
+	if (x < 1) throw "is too short of a title. Please enter a valid program title";
+} catch (err) {
+	title.innerHTML = "Input" + err;
+} finally {
+	document.getElementById("datainput").value = "";
+}
 }
 
-a { color: #e7b038; text-decoration: underline; cursor:pointer; }
-a:hover { text-decoration: none; }
-a img { border: 0; }
-
-input, textarea, select { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }
-textarea { overflow: auto; }
-
-.cl { display: block; height: 0; font-size: 0; line-height: 0; text-indent: -4000px; clear: both; }
-.notext { font-size: 0; line-height: 0; text-indent: -4000px; }
-
-.left, .alignleft { float: left; display: inline; }
-.right, .alignright { float: right; display: inline; }
-.text-right { text-align:right; }
-
-h2 { font-size:10px; color:#f2a223; font-weight:bold; }
-h3 { font-size:14px; color:#fff; font-weight:bold; }
-h4 { font-size:14px; color:#f3b12b; font-weight:bold; }
-
-#shell { width:980px; margin:0 auto; }
-
-#header { position:relative; }
-
-h1#logo { position:absolute; top:37px; left:0; }
-h1#logo a { float:left; width:239px; height:100px; background:url('images/logo.png') no-repeat 0 0; font-size: 0; line-height: 0; text-indent: -4000px; }
-
-#navigation { float:right; clear:right; padding-top:28px; padding-bottom:47px; }
-#navigation ul { list-style:none; }
-#navigation ul li { float:left; display:inline; padding-left:29px;  }
-#navigation ul li a { font-size:14px; font-weight:bold; color:#fff; text-decoration:none; }
-#navigation ul li a.active,
-#navigation ul li a:hover { color:#d91d2a; }
-
-#sub-navigation { display:block; clear:right; border-top:1px dashed #666; border-bottom:1px dashed #666; padding:8px 0;  }
-#sub-navigation ul { list-style:none; }
-#sub-navigation ul li { float:left; display:inline; padding-right:23px;  }
-#sub-navigation ul li a { font-size:14px; font-weight:bold; color:#fff; line-height:24px; text-decoration:none; }
-#sub-navigation ul li a:hover { text-decoration:underline; }
-
-#search { width:346px; margin:0 0 0 auto; }
-#search label { float:left; display:inline; font-size:14px; font-weight:bold; color:#fff; line-height:24px; padding-right:6px; }
-#search .search-field { width:238px; border: 1px solid #413e3e; background:#000; color:#787878; padding:2px 0 2px 2px; }
-#search .search-button { font-size:14px; font-weight:bold; border:0; background:none; color:#fff;   cursor:pointer; }
-
-#main { border-bottom:1px dashed #413e3e; }
-#content {  }
-
-.box { width:980px; border-bottom:1px dashed #413e3e; padding-bottom:21px; }
-
-.box .head { width:980px; padding-top:14px; padding-bottom:11px; }
-.box .head h2 { float:left; display:inline; }
-
-.box .movie { width:152px; float:left; padding-right:12px; }
-.movie-image { float:left; width:152px; height:214px; position:relative; }
-.movie-image img { width:152px; height:214px; }
-.movie-image a { float: left; display: inline; width:152px; height:214px; position: relative; z-index: 2; }
-.play { position: absolute; top: 0; left: 0; width:152px; height:214px; background: url('images/image-hover.png'); display:block; z-index: 5; cursor:pointer; display:none; }
-.movie span.name { font-weight:bold; color:#fff; font-size:14px; text-align:center; padding-top:160px; display:block; }
-
-.box .last { padding:0; }
-
-.rating { float:left; width:152px; padding-top:8px; }
-.rating p { float:left; font-size:10px; color:#fff; font-weight:bold; }
-.rating .stars { float:left; width:60px; height:11px; background:url('images/stars.gif') no-repeat 0 0; margin-left:2px;}
-.rating .stars-in { width:48px; display:inline; background:url('images/stars.gif') no-repeat 0 bottom; position:absolute; height:11px; font-size: 0; line-height: 0; text-indent: -4000px;}
-.comments { background:url('images/comments.gif') no-repeat 0 center; padding-left:12px; float:right; }
-
-#news { width:460px; float:left; }
-#news .head { width:460px; padding-top:11px; padding-bottom:14px;  }
-#news h3, #coming h3 { float:left;  }
-
-#coming { width:490px; float:left; padding-left:30px; }
-#coming .head { width:490px; padding-top:11px; padding-bottom:14px;  }
-#coming .head strong { color:#ff361a; }
-#coming .content { min-height:130px; height: auto !important; height:130px; padding-bottom:20px; }
-#coming .content h4 { padding-bottom:3px; }
-
-.content { padding-bottom:28px; }
-.content .date { font-size:10px; color:#fff; }
-.content img { float:left; width:68px; padding-right:8px; }
-.content p { font-size:13px; color:#fff; line-height:16px; }
-.content a { font-size:11px;  }
-
-#footer { padding:15px 0 0 0; }
-#footer p { text-align:center; font-size:10px; padding-bottom:11px; }
-#footer a { color:#9c9c9c; font-size:10px; }
-#footer a:hover { color:#e44400; text-decoration:none; }
-
-#footer a:hover.designby { color:#9c9c9c; text-decoration:none; }
+//Page not found error message
+try {
+	var node = document.getElementsByTagName('h1').item(0);
+  	var refnode = node.nextSibling;
+  	var newnode = document.createTextNode('You came across a page that no longer exists. Please navigate back.');
+  	node.insertBefore(newnode, refnode);
+} catch(err) {
+	alert(err.code);
+}
 ```
+
+## Performance and Refactoring
+
+* Coding Practices
+
+	* Minimize unnecessary database access
+	* To improve code consistency:
+		* Using a function declaration instead of a var declaration
+		* Using [] instead of charAt()
+	* Not leaking the arguments object to improve performance
+	* Avoiding executing callback twice and making sure to return after the first time
+	* Making sure to cache
+		* Since node.js runs permanently, frequently used variables could be set only once and reuse for each user during every request
+		* Performance will be better if more high-use items are cached
+	* Node project was started with npm init
+	* API and route calls are handled and delivered asynchronously with callbacks.
+	* All dependencies are required as the server starts to ensure that no errors occur once the application is spun up.
+	* Helmet used to help secure the application by setting various HTTP headers
+	
+## Testing
+
+We are testing based on each functionality in our system. We are doing scenario based testing in order to figure out what to test and then using these scenarios to create test cases. 
+
+* Test Scenarios
+
+	* User needs to be able to login
+	* User needs to be able to search for the movies
+	* User needs to be able to click on the movie name to find out more details about it
+	* User needs to be able to search for their friends
+	* User should be able to view their friends profile
+	* After searching for their friends, user should have the ability to follow their friends
+	* User should be able to view their own profile to keep track of their followers and who they are following
+	* User should be able to favorite and view their favorite movies
+	
+* Test Cases
+
+	* User navigates to login icon from the homepage and logs in using their username and password
+	* User types the movie name in the search bar on the homepage
+	* User clicks on the name of the movie which opens up another view with more detailed information about the movie
+	* User goes to “Search Friends” tab on navigation menu to search for their friends
+	* User clicks on their friends name to view their profile
+	* User can click on “Follow” to follow their friends
+	* User clicks on “My profile” on the navigation menu and be able to view a list of who they are following and who is following them
+	* User can click on the star next to the movies to favorite them and can view favorited movies in their profile.
+
+## Deployment
+
+* Our application is hosted on a web server. Firstly, the files needed for the application can be cloned from git here: https://github.com/Rangoons/kgApp.git. The system uses a MySQL database that can be set up by running the `install.sql` script provided. The install script can be ran on your server by navigating to your database admin panel; generally phpMyAdmin or Adminer. Copy the lines of code within `install.sql` and paste them into the raw sql section of the admin panel and run the commands. The credentials in the db connection file (connectdb.php) need to be modified to work with the destination server’s credentials. The rest of the files then need to be uploaded to the server. Folder permissions should be set to 755 and file permissions should be set to 644.
+
+* Here is the git clone command: git clone https://github.com/Rangoons/kgApp.git. Please refer to this link for any additional help with cloning our application from github: https://help.github.com/articles/cloning-a-repository/
+
+## Help System
+
+* Our application will have a separated help center similar to many social media websites and applications. Rather than integrating page by page help in each part of the application, the help system will be independent from the application pages and be accessed through a persistent help link in the interface. Once a user goes to the help website, they will be met with an organized list of topics to find help on as well as a keyword search function. The downside of this system is that no matter what page the user is on, they will need to have some idea of how to find the help they need as the help pages are not associated with the different screens of the application. This can be mitigated by creating clear categorization using simple language that will allow users to easily identify what part of the help they are looking for. The benefit that this provides is that all the help will be sorted into a central help area rather than being page based, keeping it out of the way of users that do not need it and isolating its organization from that of the app.
+
+* A good example of a similar help system for a relatively simple social media app is Instagram, which can be found at https://help.instagram.com/. 
+
+* The aspect we have chosen to hone in for the help system is account management. Our application is largely account-based, as the application will require login to use. The account management section of the help system would include at least the following:
+	* Note: Italicized text denotes hyperlinks to associated pages of the website.
+	
+	* Account Management
+		* Account Creation: 
+			* Making the most out of Pocketfilms requires users to create an account. The account creation page can be found *here*.
+			* Account creation requires the following information:
+				* Username: A unique name that will be displayed to other Pocketfilms users, including your friends. May include letters and numbers but no special characters.
+				* Password: A password of at least six characters that is used to access your account. Passwords are case sensitive and may include letters, numbers, and a variety of special characters. For maximum security, we recommend including lowercase and uppercase letters, numbers, and special characters.
+				* Repeat password: You will be asked to enter the same password twice for verification that you have correctly typed your desired password.
+				* Email: Pocketfilms requires users to sign up with an email address for account verification. Your email will not be displayed to other users and you will not receive anything from Pocketfilms other than account verification. The email may also be used to reset your password and by other Pocketfilms users to search for your account.
+				* Name (optional): Your real name, or as much of it as you are comfortable displaying to other Pocketfilms users. Including your name will allow your friends to more easily find and identify you on Pocketfilms.
+				* Location (optional): Often, users can find others with similar interests in their area for a movie night or get-together! Not required, but will be displayed to other Pocketfilms users if entered.
+
+	* Account Settings
+		* On the account settings page, you can change any of your account information that was set during account creation. No matter what you change, your account details will be preserved! See *Account Creation* for an explanation of the field available to change.
+
+	* Finding Friends
+		* A big part of the Pocketfilms experience is social, or sharing your favorite movies and short films with your friends! The *friend search page* contains one simple search bar that allows you to find friends using any piece of their public account information. The search function will find users by matching your search query to existing usernames, email addresses, and real names.
+
+	* Privacy and Security
+		* Pocketfilms will not reveal any private account information to other users or outsiders, including your password, email address, IP address, or any other information about you or your computer. All account information is stored in a secure database that cannot be accessed without proper authentication. 
